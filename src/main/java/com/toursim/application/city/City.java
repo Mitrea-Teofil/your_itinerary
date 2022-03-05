@@ -1,25 +1,44 @@
 package com.toursim.application.city;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.toursim.application.attraction.Attraction;
 import com.toursim.application.base.RateableEntity;
+import com.toursim.application.rating.Rating;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity(name = "city")
+@Entity
+@Table(name = "City")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class City extends RateableEntity {
+    @Column(nullable = false)
+    private String name;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
     @Column(nullable = false)
-    String name;
-    @Column(nullable = false)
-    String description;
-    @Column(nullable = false)
-    String picture;
+    private String description;
 
-    public int getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String picture;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Continent continent;
+
+    @OneToMany(
+            mappedBy = "city",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    protected List<Rating> ratings;
+
+    @OneToMany(
+            mappedBy = "city",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Attraction> attractions;
 
     public String getName() {
         return name;
@@ -43,5 +62,35 @@ public class City extends RateableEntity {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Continent getContinent() {
+        return continent;
+    }
+
+    public void setContinent(Continent continent) {
+        this.continent = continent;
+    }
+
+    @Override
+    @JsonIgnore
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    @Override
+    @JsonIgnore
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    @JsonIgnore
+    public List<Attraction> getAttractions() {
+        return attractions;
+    }
+
+    @JsonIgnore
+    public void setAttractions(List<Attraction> attractions) {
+        this.attractions = attractions;
     }
 }

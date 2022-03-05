@@ -1,27 +1,40 @@
 package com.toursim.application.base;
 
-import org.springframework.util.CollectionUtils;
 import com.toursim.application.rating.Rating;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@MappedSuperclass
 public abstract class RateableEntity {
 
-    protected List<Rating> ratings;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected int id;
 
-    public List<Rating> getRatings() {
-        return ratings;
+    public int getId() {
+        return id;
     }
 
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public abstract List<Rating> getRatings();
+
+    public abstract void setRatings(List<Rating> ratings);
 
     public void addRating(Rating rating) {
-        if (CollectionUtils.isEmpty(ratings)) {
-            ratings = new ArrayList<>();
+        List<Rating> ratings = getRatings();
+
+        if (ratings == null) {
+            List<Rating> newRatings = new ArrayList<>();
+            newRatings.add(rating);
+            this.setRatings(newRatings);
+            return;
         }
+
         ratings.add(rating);
     }
 }

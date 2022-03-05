@@ -1,26 +1,31 @@
 package com.toursim.application.itinerary;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.toursim.application.attraction.Attraction;
 import com.toursim.application.base.RateableEntity;
-import com.toursim.application.itAtRelationship.ItAtRelationship;
+import com.toursim.application.rating.Rating;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "itinerary")
+@Entity
+@Table(name = "Itinerary")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Itinerary extends RateableEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
     @Column(nullable = false)
     int numberDays;
+
     @Column(nullable = false)
     String description;
+
     @Column(nullable = false)
     double price;
+
     @Column(nullable = false)
     String guideName;
+
     @ManyToMany
     @JoinTable(
             name = "it_at_relationship",
@@ -28,9 +33,12 @@ public class Itinerary extends RateableEntity {
             inverseJoinColumns = @JoinColumn(name = "id_attraction"))
     List<Attraction> attractions;
 
-    public int getId() {
-        return id;
-    }
+    @OneToMany(
+            mappedBy = "itinerary",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    protected List<Rating> ratings;
 
     public int getNumberDays() {
         return numberDays;
@@ -70,5 +78,17 @@ public class Itinerary extends RateableEntity {
 
     public void setAttractions(List<Attraction> attractions) {
         this.attractions = attractions;
+    }
+
+    @Override
+    @JsonIgnore
+    public List<Rating> getRatings() {
+        return this.ratings;
+    }
+
+    @Override
+    @JsonIgnore
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }
