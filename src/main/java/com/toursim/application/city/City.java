@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.toursim.application.attraction.Attraction;
 import com.toursim.application.base.RateableEntity;
+import com.toursim.application.itinerary.Itinerary;
 import com.toursim.application.rating.Rating;
 
 import javax.persistence.*;
@@ -13,6 +14,11 @@ import java.util.List;
 @Table(name = "City")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class City extends RateableEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @Column(nullable = false)
     private String name;
 
@@ -31,6 +37,13 @@ public class City extends RateableEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    private List <Itinerary> itineraries;
+
+    @OneToMany(
+            mappedBy = "city",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     protected List<Rating> ratings;
 
     @OneToMany(
@@ -39,6 +52,22 @@ public class City extends RateableEntity {
             orphanRemoval = true
     )
     private List<Attraction> attractions;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Itinerary> getItineraries() {
+        return itineraries;
+    }
+
+    public void setItineraries(List<Itinerary> itineraries) {
+        this.itineraries = itineraries;
+    }
 
     public String getName() {
         return name;

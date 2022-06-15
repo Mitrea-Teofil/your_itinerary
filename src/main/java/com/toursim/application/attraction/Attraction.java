@@ -14,6 +14,11 @@ import java.util.List;
 @Table(name = "Attraction")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attraction extends RateableEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @Column(nullable = false)
     private String name;
 
@@ -38,6 +43,14 @@ public class Attraction extends RateableEntity {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -97,5 +110,19 @@ public class Attraction extends RateableEntity {
     @JsonIgnore
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    @Override
+    public String toString() {
+        return "Attraction{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", picture='" + picture + '\'' +
+                ", price=" + price +
+                ", itineraries=" + itineraries +
+                ", ratings=" + ratings +
+                ", city=" + city +
+                '}';
     }
 }

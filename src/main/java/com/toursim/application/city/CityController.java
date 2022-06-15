@@ -1,5 +1,6 @@
 package com.toursim.application.city;
 
+import com.toursim.application.attraction.Attraction;
 import com.toursim.application.rating.Rating;
 import com.toursim.application.rating.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,52 +16,80 @@ import java.util.Optional;
 @RequestMapping("/cities")
 public class CityController {
 
-    @Autowired
-    private CityRepository cityRepository;
+//    @Autowired
+//    private CityRepository cityRepository;
+//
+//    @Autowired
+//    private RatingRepository ratingRepository;
 
     @Autowired
-    private RatingRepository ratingRepository;
+    private CityService cityService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
-    public ResponseEntity<City> cityExists(@PathVariable("id") Integer cityId) {
+//    @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
+//    public ResponseEntity<City> cityExists(@PathVariable("id") Integer cityId) {
+//
+//        Optional<City> optional = cityRepository.findById(cityId);
+//        if (!optional.isPresent()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
-        Optional<City> optional = cityRepository.findById(cityId);
-        if (!optional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
+//    @RequestMapping(method = RequestMethod.GET)
+//    public ResponseEntity<List<City>> getAll() {
+//        List<City> all = cityRepository.findAll();
+//        return new ResponseEntity<>(all, HttpStatus.OK);
+//    }
+
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public ResponseEntity<City> getCityById(@PathVariable("id") Integer id) {
+//        Optional<City> optional = cityRepository.findById(id);
+//
+//        if (!optional.isPresent()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        City city = optional.get();
+////        addRatings(city);
+//        return new ResponseEntity<>(city, HttpStatus.NOT_FOUND);
+//    }
+
+//    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<City> addCity(@RequestBody City city) {
+//        City saved = cityRepository.save(city);
+
+//        if (saved != null) {
+//            return new ResponseEntity<>(saved, HttpStatus.CREATED);
+//        }
+//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//    }
+
+//    private void addRatings(City city) {
+//        List<Rating> ratingsByCityId = ratingRepository.getRatingsByCityId(city);
+//        city.setRatings(ratingsByCityId);
+//    }
+
+    @GetMapping
+    public List<City> getCities(){
+        return cityService.getCities();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<City>> getAll() {
-        List<City> all = cityRepository.findAll();
-        return new ResponseEntity<>(all, HttpStatus.OK);
+    @GetMapping("/{id}")
+    public City getCity(@PathVariable int id){
+        return cityService.getCity(id);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<City> getCityById(@PathVariable("id") Integer id) {
-        Optional<City> optional = cityRepository.findById(id);
-
-        if (!optional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        City city = optional.get();
-//        addRatings(city);
-        return new ResponseEntity<>(city, HttpStatus.NOT_FOUND);
+    @PostMapping
+    public City saveCity(@RequestBody City city){
+        return cityService.saveCity(city);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<City> addCity(@RequestBody City city) {
-        City saved = cityRepository.save(city);
-
-        if (saved != null) {
-            return new ResponseEntity<>(saved, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @PutMapping("/{id}")
+    public City updateCity(@PathVariable int id, @RequestBody City city){
+        return cityService.updateCity(id, city);
     }
 
-    private void addRatings(City city) {
-        List<Rating> ratingsByCityId = ratingRepository.getRatingsByCityId(city);
-        city.setRatings(ratingsByCityId);
+    @DeleteMapping()
+    public void deleteCity(@RequestParam("id") int id){
+        cityService.deleteCity(id);
     }
 }

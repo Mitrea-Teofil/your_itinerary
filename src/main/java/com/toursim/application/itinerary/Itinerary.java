@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.toursim.application.attraction.Attraction;
 import com.toursim.application.base.RateableEntity;
+import com.toursim.application.city.City;
 import com.toursim.application.rating.Rating;
 
 import javax.persistence.*;
@@ -14,17 +15,25 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Itinerary extends RateableEntity {
 
-    @Column(nullable = false)
-    int numberDays;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column(nullable = false)
-    String description;
+    private int numberDays;
 
     @Column(nullable = false)
-    double price;
+    private String description;
 
     @Column(nullable = false)
-    String guideName;
+    private double price;
+
+    @Column(nullable = false)
+    private String guideName;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     @ManyToMany
     @JoinTable(
@@ -39,6 +48,22 @@ public class Itinerary extends RateableEntity {
             orphanRemoval = true
     )
     protected List<Rating> ratings;
+
+    public int getId() {
+        return id;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getNumberDays() {
         return numberDays;
