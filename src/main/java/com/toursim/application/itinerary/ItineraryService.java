@@ -21,7 +21,7 @@ public class ItineraryService {
         if(foundItinerary.isPresent()){
             return foundItinerary.get();
         }else{
-            throw new RuntimeException("The itinerary doesn't exist " + id);
+            throw new RuntimeException("itinerary is not found for the id " + id);
         }
     }
 

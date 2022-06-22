@@ -21,7 +21,7 @@ public class CityService {
         if (foundCity.isPresent()) {
             return foundCity.get();
         } else {
-            throw new RuntimeException("The city doesn't exist" + id);
+            throw new RuntimeException("City is not found for the id " + id);
         }
     }
 

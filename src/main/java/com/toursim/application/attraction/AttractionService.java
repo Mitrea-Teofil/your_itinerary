@@ -22,7 +22,7 @@ public class AttractionService {
          if(foundAttraction.isPresent()){
              return foundAttraction.get();
          }else{
-             throw new RuntimeException("Attraction is not found for the id" + id);
+             throw new RuntimeException("The Attraction is not found for the id" + id);
          }
     }
 

@@ -2,6 +2,7 @@ package com.toursim.application.attraction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -29,8 +30,11 @@ public class AttractionController {
 //    }
 
     @GetMapping
-    public List<Attraction> getAttractions(){
-        return attractionService.getAttractions();
+    public ModelAndView getAttractions(){
+        ModelAndView mov = new ModelAndView("list-attractions");
+        List<Attraction> attractions = attractionService.getAttractions();
+        mov.addObject("attractions", attractions);
+        return  mov;
     }
 
     @GetMapping("/{id}")

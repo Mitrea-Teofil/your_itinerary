@@ -6,6 +6,7 @@ import com.toursim.application.attraction.Attraction;
 import com.toursim.application.base.RateableEntity;
 import com.toursim.application.city.City;
 import com.toursim.application.rating.Rating;
+import com.toursim.application.user.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,9 +36,13 @@ public class Itinerary extends RateableEntity {
     @JoinColumn(name = "city_id")
     private City city;
 
+    @ManyToOne
+    @JoinColumn(name = "itinerary_id")
+    private User user;
+
     @ManyToMany
     @JoinTable(
-            name = "it_at_relationship",
+            name = "itinerary_attraction",
             joinColumns = @JoinColumn(name = "id_itinerary"),
             inverseJoinColumns = @JoinColumn(name = "id_attraction"))
     List<Attraction> attractions;
@@ -48,6 +53,14 @@ public class Itinerary extends RateableEntity {
             orphanRemoval = true
     )
     protected List<Rating> ratings;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;

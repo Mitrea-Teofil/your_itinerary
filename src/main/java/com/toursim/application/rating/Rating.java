@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.toursim.application.attraction.Attraction;
 import com.toursim.application.city.City;
 import com.toursim.application.itinerary.Itinerary;
+import com.toursim.application.user.User;
 
 import javax.persistence.*;
 
@@ -17,7 +18,11 @@ public class Rating {
     private int id;
     @Column(nullable = false)
     private int stars;
+    @Column
     private String comment;
+
+    @OneToOne(mappedBy = "rating")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "itinerary_id")
@@ -31,6 +36,13 @@ public class Rating {
     @JoinColumn(name = "attraction_id")
     private Attraction attraction;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getStars() {
         return stars;
