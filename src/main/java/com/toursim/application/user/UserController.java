@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/register")
+//@RequestMapping
 public class UserController {
 
     @Autowired
@@ -49,18 +49,17 @@ public class UserController {
         return new UserRegistrationDto();
     }
 
-    @GetMapping
+    @GetMapping("/register")
     public String showRegistrationForm() {
         return "register";
     }
 
-//    @GetMapping
-//    public String userIsLogged(){
-//        return SecurityContextHolder.getContext().getAuthentication() != null &&
-//                SecurityContextHolder.getContext().getAuthentication().isAuthenticated() ? "isLoggedIn" : null;
+//    @GetMapping("/itinerary")
+//    public String showItineraryForm() {
+//        return "itinerary";
 //    }
 
-    @PostMapping
+    @PostMapping("/register")
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
        try{
            userService.save(registrationDto);

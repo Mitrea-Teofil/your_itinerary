@@ -13,22 +13,6 @@ public class AttractionController {
     @Autowired
     private AttractionService attractionService;
 
-//    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Attraction> addAttraction(@RequestBody Attraction attraction) {
-//        Attraction saved = repository.save(attraction);
-//
-//        if (saved != null) {
-//            return new ResponseEntity<>(saved, HttpStatus.CREATED);
-//        }
-//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//    }
-
-//    @RequestMapping(method = RequestMethod.GET)
-//    public ResponseEntity<List<Attraction>> getAll() {
-//        List<Attraction> all = repository.findAll();
-//        return new ResponseEntity<>(all, HttpStatus.OK);
-//    }
-
     @GetMapping
     public ModelAndView getAttractions(){
         ModelAndView mov = new ModelAndView("list-attractions");

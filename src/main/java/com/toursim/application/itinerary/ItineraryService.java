@@ -34,10 +34,10 @@ public class ItineraryService {
                 .map(updatedItinerary -> {
                     updatedItinerary.setNumberDays(itinerary.getNumberDays());
                     updatedItinerary.setDescription(itinerary.getDescription());
-                    updatedItinerary.setPrice(itinerary.getPrice());
                     updatedItinerary.setGuideName(itinerary.getGuideName());
-//                    updatedItinerary.setAttractions(itinerary.getAttractions());
-//                    updatedItinerary.setRatings(itinerary.getRatings());
+                    updatedItinerary.setPicture(itinerary.getPicture());
+                    updatedItinerary.setAttractions(itinerary.getAttractions());
+                    updatedItinerary.setRatings(itinerary.getRatings());
                     return itineraryRepository.save(updatedItinerary);
                 })
                 .orElseGet(() ->{

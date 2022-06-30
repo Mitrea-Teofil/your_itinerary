@@ -32,12 +32,15 @@ public class Itinerary extends RateableEntity {
     @Column(nullable = false)
     private String guideName;
 
+    @Column(nullable = false)
+    private String picture;
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
 
     @ManyToOne
-    @JoinColumn(name = "itinerary_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany
@@ -98,6 +101,7 @@ public class Itinerary extends RateableEntity {
         return price;
     }
 
+    @JsonIgnore
     public void setPrice(double price) {
         this.price = price;
     }
@@ -108,6 +112,14 @@ public class Itinerary extends RateableEntity {
 
     public void setGuideName(String guideName) {
         this.guideName = guideName;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public List<Attraction> getAttractions() {
