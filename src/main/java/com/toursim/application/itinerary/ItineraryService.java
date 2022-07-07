@@ -1,10 +1,13 @@
 package com.toursim.application.itinerary;
 
+import com.toursim.application.base.Utilities;
+import com.toursim.application.rating.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ItineraryService {
@@ -12,45 +15,52 @@ public class ItineraryService {
     @Autowired
     private ItineraryRepository itineraryRepository;
 
-    public List<Itinerary> getItineraries() {
-        return itineraryRepository.findAll();
+    @Autowired
+    private RatingRepository ratingRepository;
+
+    public List<RItinerary> getItineraries() {
+        List<Itinerary> all = itineraryRepository.findAll();
+        List<RItinerary> rItineraries = all.stream().map(Utilities::prepareItineraryForClient).collect(Collectors.toList());
+        return rItineraries;
     }
 
-    public Itinerary getItinerary(int id) {
+    public RItinerary getItinerary(int id) {
         Optional<Itinerary> foundItinerary = itineraryRepository.findById(id);
-        if(foundItinerary.isPresent()){
-            return foundItinerary.get();
-        }else{
-            throw new RuntimeException("itinerary is not found for the id " + id);
+        if (foundItinerary.isPresent()) {
+            Itinerary itinerary = foundItinerary.get();
+            return Utilities.prepareItineraryForClient(itinerary);
         }
+        throw new RuntimeException("itinerary is not found for the id " + id);
     }
 
-    public Itinerary saveItinerary(Itinerary itinerary) {
-        return itineraryRepository.save(itinerary);
+    public RItinerary saveItinerary(Itinerary itinerary) {
+        return ItineraryAdapter.toClientModel(itineraryRepository.save(itinerary));
     }
 
-    public Itinerary updateItinerary(int id, Itinerary itinerary) {
+    public RItinerary updateItinerary(int id, Itinerary itinerary) {
         return itineraryRepository.findById(id)
                 .map(updatedItinerary -> {
+                    updatedItinerary.setName(itinerary.getName());
                     updatedItinerary.setNumberDays(itinerary.getNumberDays());
                     updatedItinerary.setDescription(itinerary.getDescription());
-                    updatedItinerary.setGuideName(itinerary.getGuideName());
                     updatedItinerary.setPicture(itinerary.getPicture());
-                    updatedItinerary.setAttractions(itinerary.getAttractions());
+//                    updatedItinerary.setAttractions(itinerary.getAttractions());
                     updatedItinerary.setRatings(itinerary.getRatings());
-                    return itineraryRepository.save(updatedItinerary);
+                    return ItineraryAdapter.toClientModel(itineraryRepository.save(updatedItinerary));
                 })
-                .orElseGet(() ->{
+                .orElseGet(() -> {
                     itinerary.setId(id);
-                    return itineraryRepository.save(itinerary);
+                    return ItineraryAdapter.toClientModel(itineraryRepository.save(itinerary));
                 });
     }
+
     public void deleteItinerary(int id) {
         itineraryRepository.deleteById(id);
     }
 
-    private void isValid(Itinerary itinerary){
-
-        itinerary.getAttractions().stream().allMatch(attraction -> attraction.getCity().getId() == (itinerary.getCity().getId()));
+    private void isValid(RItinerary itinerary) {
+        itinerary.getAttractions().stream().allMatch(itrAtrRel -> itrAtrRel.getAttraction().getCity().getId() == (itinerary.getCity().getId()));
     }
+
+
 }

@@ -53,7 +53,7 @@ public class UserService implements UserServiceInterface {
                     updatedUser.setEmail(user.getEmail());
                     updatedUser.setPassword(user.getPassword());
                     updatedUser.setItinerary(user.getItinerary());
-                    updatedUser.setRating(user.getRating());
+                    updatedUser.setRatings(user.getRatings());
                     return userRepository.save(updatedUser);
                 })
                 .orElseGet(() ->{

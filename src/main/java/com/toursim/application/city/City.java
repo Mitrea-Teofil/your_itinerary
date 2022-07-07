@@ -37,7 +37,7 @@ public class City extends RateableEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List <Itinerary> itineraries;
+    private List<Itinerary> itineraries;
 
     @OneToMany(
             mappedBy = "city",

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration and Login App</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<br>
+<br>
+<br>
+
+<section class="oneDay" id="oneDay">
+
+    <h1 class="heading">
+        <span>O</span>
+        <span>n</span>
+        <span>e</span>
+        <span class="space"></span>
+        <span>D</span>
+        <span>a</span>
+        <span>y</span>
+        <span class="space"></span>
+        <span>I</span>
+        <span>t</span>
+        <span>i</span>
+        <span>n</span>
+        <span>e</span>
+        <span>r</span>
+        <span>a</span>
+        <span>r</span>
+        <span>i</span>
+        <span>e</span>
+        <span>s</span>
+    </h1>
+
+    <div class="box-container">
+
+
+        <div class="box" th:each="itinerary: ${oneDayIt}">
+            <img th:src=${itinerary.picture} alt="">
+            <div class="content">
+                <h3><i class="fas fa-map-marker-alt"></i> <span th:text="${itinerary.name}"/></h3>
+                <div class="stars">
+                    <span th:text="|${itinerary.rating}/5|"/>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price">
+                    Approximate costs:
+                    <span th:text="${itinerary.price}"/>$
+                </div>
+                <a th:href="@{/itinerary/{id}(id = ${itinerary.id})}" class="btn btn-primary btn-sm mb-3">View full
+                    itinerary</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Two day-->
+
+<section class="twoDay" id="twoDay">
+
+    <h1 class="heading">
+        <span>T</span>
+        <span>w</span>
+        <span>o</span>
+        <span class="space"></span>
+        <span>D</span>
+        <span>a</span>
+        <span>y</span>
+        <span class="space"></span>
+        <span>I</span>
+        <span>t</span>
+        <span>i</span>
+        <span>n</span>
+        <span>e</span>
+        <span>r</span>
+        <span>a</span>
+        <span>r</span>
+        <span>i</span>
+        <span>e</span>
+        <span>s</span>
+    </h1>
+
+    <div class="box-container">
+
+
+        <div class="box" th:each="itinerary: ${twoDayIt}">
+            <img th:src=${itinerary.picture} alt="">
+            <div class="content">
+                <h3><i class="fas fa-map-marker-alt"></i> <span th:text="${itinerary.name}"/></h3>
+                <!--                        <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover-->
+                <!--                            Itineraries</a>-->
+
+                <!--            </div>-->
+
+
+                <div class="stars">
+                    <span th:text="|${itinerary.rating}/5|"/>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price">
+                    <span th:text="${itinerary.price}"/>$
+                </div>
+                <a th:href="@{/itinerary/{id}(id = ${itinerary.id})}" class="btn btn-primary btn-sm mb-3">View full
+                    itinerary</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--Three Day-->
+
+<section class="threeDay" id="threeDay">
+
+    <h1 class="heading">
+        <span>T</span>
+        <span>h</span>
+        <span>r</span>
+        <span>e</span>
+        <span>e</span>
+        <span class="space"></span>
+        <span>D</span>
+        <span>a</span>
+        <span>y</span>
+        <span class="space"></span>
+        <span>I</span>
+        <span>t</span>
+        <span>i</span>
+        <span>n</span>
+        <span>e</span>
+        <span>r</span>
+        <span>a</span>
+        <span>r</span>
+        <span>i</span>
+        <span>e</span>
+        <span>s</span>
+    </h1>
+
+    <div class="box-container">
+
+        <div class="box" th:each="itinerary: ${threeDayIt}">
+            <img th:src=${itinerary.picture} alt="">
+            <div class="content">
+                <h3><i class="fas fa-map-marker-alt"></i> <span th:text="${itinerary.name}"/></h3>
+                <div class="stars">
+                    <span th:text="|${itinerary.rating}/5|"/>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price">
+                    <span th:text="${itinerary.price}"/>$
+                </div>
+                <a th:href="@{/itinerary/{id}(id = ${itinerary.id})}" class="btn btn-primary btn-sm mb-3">View full
+                    itinerary</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="book" id="book">
+
+    <h1 class="heading">
+        <span>C</span>
+        <span>r</span>
+        <span>e</span>
+        <span>a</span>
+        <span>t</span>
+        <span>e</span>
+        <span class="space"></span>
+        <span>Y</span>
+        <span>o</span>
+        <span>u</span>
+        <span>r</span>
+        <span class="space"></span>
+        <span>I</span>
+        <span>t</span>
+        <span>i</span>
+        <span>n</span>
+        <span>r</span>
+        <span>a</span>
+        <span>r</span>
+        <span>y</span>
+    </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img th:src="@{/images/book-img.svg}"/>
+        </div>
+
+        <form action="">
+            <div class="inputBox">
+                <h3>Name</h3>
+                <input type="text" class="wideInput" placeholder="Name your itinerary">
+            </div>
+            <div class="inputBox">
+                <h3>Picture link</h3>
+                <input type="text" class="wideInput" placeholder="Please provide a link to a picture that represents your itinerary">
+            </div>
+            <div class="inputBox">
+                <h3>Enter a meaningful description</h3>
+                <textarea name="description"
+                          class="form-control"
+                          placeholder="Enter Itinerary description"
+                          rows="6"
+                          style="resize: none;"
+                ></textarea>
+            </div>
+
+            <div class="inputBox">
+                <h3><b>Select your attractions for each day</b></h3>
+                <h4>Day One</h4>
+                <div class="attractionsBorder">
+                    <div th:each="atr: ${attractions}" th:value="${atr.id}">
+                        <input type="checkbox" th:id="${atr.id} + '_1'" th:value="${atr.id}">
+                        <label th:text="${atr.name}" th:for="${atr.id} + '_1'"/>
+                    </div>
+                </div>
+            </div>
+            <div class="inputBox">
+                <h4>Day Two</h4>
+                <div class="attractionsBorder">
+                    <div th:each="atr: ${attractions}" th:value="${atr.id}">
+                        <input type="checkbox" th:id="${atr.id} + '_2'" th:value="${atr.id}">
+                        <label th:text="${atr.name}" th:for="${atr.id} + '_2'"/>
+                    </div>
+                </div>
+            </div>
+            <div class="inputBox">
+                <h4>Day Three</h4>
+                <div class="attractionsBorder">
+                    <div th:each="atr: ${attractions}" th:value="${atr.id}">
+                        <input type="checkbox" th:id="${atr.id} + '_3'" th:value="${atr.id}">
+                        <label th:text="${atr.name}" th:for="${atr.id} + '_3'"/>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn" value="Create">
+        </form>
+    </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<img src="" th:src="@{/images}" alt=""/>
+
+
+<br>
+<br>
+
+</body>
+
+</html>

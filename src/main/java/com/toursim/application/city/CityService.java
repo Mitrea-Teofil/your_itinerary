@@ -1,10 +1,15 @@
 package com.toursim.application.city;
 
+import com.toursim.application.base.Utilities;
+import com.toursim.application.itinerary.Itinerary;
+import com.toursim.application.itinerary.RItinerary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CityService {
@@ -14,6 +19,10 @@ public class CityService {
 
     public List<City> getCities() {
         return cityRepository.findAll();
+    }
+
+    public List<City> getCitiesByContinent(String continent) {
+        return cityRepository.findCitiesByContinent(continent);
     }
 
     public City getCity(int id) {
@@ -35,7 +44,6 @@ public class CityService {
                     updatedCity.setName(city.getName());
                     updatedCity.setDescription(city.getDescription());
                     updatedCity.setPicture(city.getPicture());
-//                    updatedCity.setRatings(city.getRatings());
                     return cityRepository.save(updatedCity);
                 })
                 .orElseGet(() -> {
@@ -46,5 +54,13 @@ public class CityService {
 
     public void deleteCity(int id) {
         cityRepository.deleteById(id);
+    }
+
+    public List<RItinerary> getCityItineraries(int id) {
+        City city = cityRepository.getById(id);
+        if(city != null){
+            return city.getItineraries().stream().map(Utilities::prepareItineraryForClient).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 }

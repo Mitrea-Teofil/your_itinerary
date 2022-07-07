@@ -1,6 +1,5 @@
 package com.toursim.application.user;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.toursim.application.itinerary.Itinerary;
 import com.toursim.application.rating.Rating;
 
@@ -36,9 +35,12 @@ public class User {
 
     private Collection<Role> roles;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rating_id")
-    private Rating rating;
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Rating> ratings;
 
     @OneToMany(
             mappedBy = "user",
@@ -98,12 +100,12 @@ public class User {
         this.roles = roles;
     }
 
-    public Rating getRating() {
-        return rating;
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     public List<Itinerary> getItinerary() {

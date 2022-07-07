@@ -21,7 +21,8 @@ public class Rating {
     @Column
     private String comment;
 
-    @OneToOne(mappedBy = "rating")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne

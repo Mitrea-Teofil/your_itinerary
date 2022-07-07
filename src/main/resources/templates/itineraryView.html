@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration and Login App</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <h2 th:text="${itinerary.name}"/>
+    <p th:text="${itinerary.description}" />
+    <img th:src=${itinerary.picture} alt="">
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div>
+        <h2>Day 1</h2>
+        <div th:each="atr: ${day1}">
+            <span th:text="${atr.name}"/>
+            <img th:src=${atr.picture} alt="">
+        </div>
+    </div>
+
+    <div th:if="${(day2 != null) and (day2.size > 0)}">
+        <h2>Day 2</h2>
+        <div th:each="atr: ${day2}">
+            <span th:text="${atr.name}"/>
+            <img th:src=${atr.picture} alt="">
+        </div>
+    </div>
+
+    <div th:if="${(day3 != null) and (day3.size > 0)}">
+        <h2>Day 3</h2>
+        <div th:each="atr: ${day3}">
+            <span th:text="${atr.name}"/>
+            <img th:src=${atr.picture} alt="">
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <h2>User Ratings</h2>
+        <div th:each="rating: ${itinerary.ratings}">
+            <br/>
+            <span th:text="|${rating.user.firstName} ${rating.user.lastName}|"/>
+            <span th:text="${rating.stars}"/>
+            <i class="fas fa-star"></i>
+            <br/>
+            <span th:text="${rating.comment}"/>
+        </div>
+    </div>
+</body>
+</html>

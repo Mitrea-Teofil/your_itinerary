@@ -4,14 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.toursim.application.base.RateableEntity;
 import com.toursim.application.city.City;
-import com.toursim.application.itinerary.Itinerary;
+import com.toursim.application.itinerary.ItineraryAttractionRelationship;
 import com.toursim.application.rating.Rating;
+import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "Attraction")
+@Entity(name = "Attraction")
+@Table(name = "attraction")
+@NaturalIdCache
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attraction extends RateableEntity {
 
@@ -31,8 +33,12 @@ public class Attraction extends RateableEntity {
     @Column(nullable = false)
     private double price;
 
-    @ManyToMany(mappedBy = "attractions")
-    private List<Itinerary> itineraries;
+    @OneToMany(
+            mappedBy = "attraction",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<ItineraryAttractionRelationship> itineraryRelationship;
 
     @OneToMany(
             mappedBy = "attraction",
@@ -85,12 +91,12 @@ public class Attraction extends RateableEntity {
         this.price = price;
     }
 
-    public List<Itinerary> getItineraries() {
-        return itineraries;
+    public List<ItineraryAttractionRelationship> getItineraryRelationship() {
+        return itineraryRelationship;
     }
 
-    public void setItineraries(List<Itinerary> itineraries) {
-        this.itineraries = itineraries;
+    public void setItineraryRelationship(List<ItineraryAttractionRelationship> itineraryRelationship) {
+        this.itineraryRelationship = itineraryRelationship;
     }
 
     public City getCity() {
@@ -113,17 +119,4 @@ public class Attraction extends RateableEntity {
         this.ratings = ratings;
     }
 
-    @Override
-    public String toString() {
-        return "Attraction{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", picture='" + picture + '\'' +
-                ", price=" + price +
-                ", itineraries=" + itineraries +
-                ", ratings=" + ratings +
-                ", city=" + city +
-                '}';
-    }
 }

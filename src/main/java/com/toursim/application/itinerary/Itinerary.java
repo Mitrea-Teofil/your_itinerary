@@ -2,17 +2,18 @@ package com.toursim.application.itinerary;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.toursim.application.attraction.Attraction;
 import com.toursim.application.base.RateableEntity;
 import com.toursim.application.city.City;
 import com.toursim.application.rating.Rating;
 import com.toursim.application.user.User;
+import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "Itinerary")
 @Table(name = "Itinerary")
+@NaturalIdCache
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Itinerary extends RateableEntity {
 
@@ -21,16 +22,13 @@ public class Itinerary extends RateableEntity {
     private int id;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private int numberDays;
 
     @Column(nullable = false)
     private String description;
-
-    @Column(nullable = false)
-    private double price;
-
-    @Column(nullable = false)
-    private String guideName;
 
     @Column(nullable = false)
     private String picture;
@@ -43,12 +41,12 @@ public class Itinerary extends RateableEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "itinerary_attraction",
-            joinColumns = @JoinColumn(name = "id_itinerary"),
-            inverseJoinColumns = @JoinColumn(name = "id_attraction"))
-    List<Attraction> attractions;
+    @OneToMany(
+            mappedBy = "itinerary",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    List<ItineraryAttractionRelationship> attractionsRelationships;
 
     @OneToMany(
             mappedBy = "itinerary",
@@ -67,6 +65,14 @@ public class Itinerary extends RateableEntity {
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public City getCity() {
@@ -97,23 +103,6 @@ public class Itinerary extends RateableEntity {
         this.description = description;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    @JsonIgnore
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getGuideName() {
-        return guideName;
-    }
-
-    public void setGuideName(String guideName) {
-        this.guideName = guideName;
-    }
-
     public String getPicture() {
         return picture;
     }
@@ -122,12 +111,12 @@ public class Itinerary extends RateableEntity {
         this.picture = picture;
     }
 
-    public List<Attraction> getAttractions() {
-        return attractions;
+    public List<ItineraryAttractionRelationship> getAttractionsRelationships() {
+        return attractionsRelationships;
     }
 
-    public void setAttractions(List<Attraction> attractions) {
-        this.attractions = attractions;
+    public void setAttractionsRelationships(List<ItineraryAttractionRelationship> attractionsRelationships) {
+        this.attractionsRelationships = attractionsRelationships;
     }
 
     @Override
