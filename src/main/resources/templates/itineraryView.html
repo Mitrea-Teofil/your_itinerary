@@ -18,45 +18,38 @@
 </head>
 <body>
 
-    <h2 th:text="${itinerary.name}"/>
-    <p th:text="${itinerary.description}" />
-    <img th:src=${itinerary.picture} alt="">
+<section class="itineraryView" id="itineraryView">
 
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <div class="content">
+        <h1 th:text="${itinerary.name}"></h1>
+        <div>
+            <h2>Day 1</h2>
+            <div th:each="atr: ${itinerary.day1}">
+                <h3 th:text="${atr.name}"></h3>
+                <img th:src=${atr.picture} alt="">
+                <p th:text="${atr.description}"></p>
+            </div>
+        </div>
+        <div th:if="${(itinerary.day3.size > 0)}">
+            <h2>Day 2</h2>
+            <div th:each="atr: ${itinerary.day2}">
+                <h3 th:text="${atr.name}"></h3>
+                <img th:src=${atr.picture} alt="">
+                <p th:text="${atr.description}"></p>
+            </div>
+        </div>
+        <div th:if="${(itinerary.day3.size > 0)}">
+            <h2>Day 3</h2>
+            <div th:each="atr: ${itinerary.day3}">
+                <h3 th:text="${atr.name}"></h3>
+                <img th:src=${atr.picture} alt="">
+                <p th:text="${atr.description}"></p>
+            </div>
+        </div>
+    </div>
 
     <div>
-        <h2>Day 1</h2>
-        <div th:each="atr: ${day1}">
-            <span th:text="${atr.name}"/>
-            <img th:src=${atr.picture} alt="">
-        </div>
-    </div>
-
-    <div th:if="${(day2 != null) and (day2.size > 0)}">
-        <h2>Day 2</h2>
-        <div th:each="atr: ${day2}">
-            <span th:text="${atr.name}"/>
-            <img th:src=${atr.picture} alt="">
-        </div>
-    </div>
-
-    <div th:if="${(day3 != null) and (day3.size > 0)}">
-        <h2>Day 3</h2>
-        <div th:each="atr: ${day3}">
-            <span th:text="${atr.name}"/>
-            <img th:src=${atr.picture} alt="">
-        </div>
-    </div>
-
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <div>
-        <h2>User Ratings</h2>
+        <h2>User feedback for this itinerary</h2>
         <div th:each="rating: ${itinerary.ratings}">
             <br/>
             <span th:text="|${rating.user.firstName} ${rating.user.lastName}|"/>
@@ -66,5 +59,7 @@
             <span th:text="${rating.comment}"/>
         </div>
     </div>
+
+</section>
 </body>
 </html>

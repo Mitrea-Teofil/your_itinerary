@@ -1,6 +1,5 @@
 package com.toursim.application.itinerary;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -28,6 +27,14 @@ public class ItineraryAttractionPK implements Serializable {
         this.id_attraction = id_attraction;
     }
 
+    public ItineraryAttractionPK() {
+        super();
+    }
+
+    public ItineraryAttractionPK(int id_itinerary, int id_attraction) {
+        this.id_attraction = id_attraction;
+        this.id_itinerary = id_itinerary;
+    }
 
     @Override
     public boolean equals(Object o) {

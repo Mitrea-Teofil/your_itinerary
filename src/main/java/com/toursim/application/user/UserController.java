@@ -1,14 +1,12 @@
 package com.toursim.application.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-//@RequestMapping
 public class UserController {
 
     @Autowired
@@ -53,11 +51,6 @@ public class UserController {
     public String showRegistrationForm() {
         return "register";
     }
-
-//    @GetMapping("/itinerary")
-//    public String showItineraryForm() {
-//        return "itinerary";
-//    }
 
     @PostMapping("/register")
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {

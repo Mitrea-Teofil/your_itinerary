@@ -1,43 +1,35 @@
 package com.toursim.application.attraction;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/attractions")
+@Controller
 public class AttractionController {
 
     @Autowired
     private AttractionService attractionService;
 
-    @GetMapping
-    public ModelAndView getAttractions(){
-        ModelAndView mov = new ModelAndView("list-attractions");
-        List<Attraction> attractions = attractionService.getAttractions();
-        mov.addObject("attractions", attractions);
-        return  mov;
+    @GetMapping("/attractions/{id}")
+    public String getAttractions(@PathVariable("id") int cityId, Model model) {
+        List<RAttraction> rAttractions = attractionService.getAttractionsForCity(cityId).stream().map(AttractionAdapter::toClientModel).collect(Collectors.toList());
+
+        RAttraction rAttraction = new RAttraction();
+        rAttraction.setCityId(cityId);
+        model.addAttribute("attractions", rAttractions);
+        model.addAttribute("newAttraction", rAttraction);
+        return "cityAttractions";
     }
 
-    @GetMapping("/{id}")
-    public Attraction getAttraction(@PathVariable int id){
-        return attractionService.getAttraction(id);
-    }
-
-    @PostMapping
-    public Attraction saveAttraction(@RequestBody Attraction attraction){
-        return attractionService.saveAttraction(attraction);
-    }
-
-    @PutMapping("/{id}")
-    public Attraction updateAttraction(@PathVariable int id, @RequestBody Attraction attraction){
-        return attractionService.updateAttraction(id, attraction);
-    }
-
-    @DeleteMapping
-    public void deleteAttraction(@RequestParam("id") int id){
-        attractionService.deleteAttraction(id);
+    @PostMapping("/attractions")
+    public String saveAttraction(RAttraction rAttraction, Model model) {
+        Attraction attraction = attractionService.saveAttraction(rAttraction);
+        return "redirect:/attractions/" + rAttraction.getCityId();
     }
 }

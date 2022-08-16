@@ -1,9 +1,11 @@
 package com.toursim.application.itinerary;
 
+import com.toursim.application.attraction.Attraction;
 import com.toursim.application.city.City;
 import com.toursim.application.rating.Rating;
 import com.toursim.application.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RItinerary {
@@ -24,11 +26,22 @@ public class RItinerary {
 
     private City city;
 
+    private int cityId;
+
     private User user;
 
-    List<ItineraryAttractionRelationship> attractions;
+    private List<Attraction> day1;
+    private List<Attraction> day2;
+    private List<Attraction> day3;
 
     protected List<Rating> ratings;
+
+
+    public RItinerary() {
+        day1 = new ArrayList<>();
+        day2 = new ArrayList<>();
+        day3 = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
@@ -102,12 +115,28 @@ public class RItinerary {
         this.user = user;
     }
 
-    public List<ItineraryAttractionRelationship> getAttractions() {
-        return attractions;
+    public List<Attraction> getDay1() {
+        return day1;
     }
 
-    public void setAttractions(List<ItineraryAttractionRelationship> attractions) {
-        this.attractions = attractions;
+    public void setDay1(List<Attraction> day1) {
+        this.day1 = day1;
+    }
+
+    public List<Attraction> getDay2() {
+        return day2;
+    }
+
+    public void setDay2(List<Attraction> day2) {
+        this.day2 = day2;
+    }
+
+    public List<Attraction> getDay3() {
+        return day3;
+    }
+
+    public void setDay3(List<Attraction> day3) {
+        this.day3 = day3;
     }
 
     public List<Rating> getRatings() {
@@ -116,5 +145,13 @@ public class RItinerary {
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 }

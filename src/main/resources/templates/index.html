@@ -82,6 +82,8 @@
                 <h4><i class="fa-solid fa-landmark"></i> Itineraries: <span th:text="${city.itineraries.size}"/></h4>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
+                <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
+                    Attractions</a>
 
             </div>
         </div>
@@ -107,7 +109,8 @@
                 <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
-
+                <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
+                    Attractions</a>
             </div>
         </div>
 
@@ -130,7 +133,8 @@
                 <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
-
+                <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
+                    Attractions</a>
             </div>
         </div>
 
@@ -159,7 +163,8 @@
                 <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
-
+                <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
+                    Attractions</a>
             </div>
         </div>
 
@@ -185,6 +190,8 @@
                 <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
+                <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
+                    Attractions</a>
             </div>
         </div>
     </div>
@@ -284,40 +291,7 @@
 
 <!-- contact section starts  -->
 
-<section class="contact" id="contact">
 
-    <h1 class="heading">
-        <span>c</span>
-        <span>o</span>
-        <span>n</span>
-        <span>t</span>
-        <span>a</span>
-        <span>c</span>
-        <span>t</span>
-    </h1>
-
-    <div class="row">
-
-        <div class="image">
-            <img src="images/contact-img.svg" alt="">
-        </div>
-
-        <form action="">
-            <div class="inputBox">
-                <input type="text" placeholder="name">
-                <input type="email" placeholder="email">
-            </div>
-            <div class="inputBox">
-                <input type="number" placeholder="number">
-                <input type="text" placeholder="subject">
-            </div>
-            <textarea placeholder="message" name="" id="" cols="30" rows="10"></textarea>
-            <input type="submit" class="btn" value="send message">
-        </form>
-
-    </div>
-
-</section>
 
 <!-- contact section ends -->
 

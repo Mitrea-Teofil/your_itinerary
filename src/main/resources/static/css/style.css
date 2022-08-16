@@ -292,6 +292,69 @@ header .search-bar-container label:hover{
   background:var(--orange);
 }
 
+/*Itinerary view*/
+.itineraryView{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  position: relative;
+  z-index: 0;
+}
+
+.itineraryView .content{
+  text-align: left;
+}
+
+.itineraryView .content h3{
+  font-size: 4.5rem;
+  color:#000000;
+  text-transform: uppercase;
+  text-shadow: 0 .3rem .5rem rgba(0,0,0,.1);
+}
+
+.itineraryView .content img{
+  width: 75%;
+}
+
+.itineraryView .content p{
+  font-size: 2.5rem;
+  color:#000000;
+  padding: .5rem 0;
+}
+
+.itineraryView .video-container video{
+  position: absolute;
+  top:0; left: 0;
+  z-index: -1;
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
+
+.itineraryView .controls{
+  padding:1rem;
+  border-radius: 5rem;
+  background:rgba(0,0,0,.7);
+  position: relative;
+  top:10rem;
+}
+
+.itineraryView .controls .vid-btn{
+  height:2rem;
+  width:2rem;
+  display: inline-block;
+  border-radius: 50%;
+  background:#fff;
+  cursor: pointer;
+  margin:0 .5rem;
+}
+
+.itineraryView .controls .vid-btn.active{
+  background:var(--orange);
+}
+
 .book .row{
   display: flex;
   flex-wrap: wrap;

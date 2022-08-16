@@ -23,6 +23,17 @@ public class ItineraryAttractionRelationship {
     @Column(name = "day")
     private int day;
 
+    public ItineraryAttractionRelationship(){
+        super();
+    }
+
+    public ItineraryAttractionRelationship(Itinerary itinerary, Attraction attraction, int day) {
+        this.id = new ItineraryAttractionPK(itinerary.getId(), attraction.getId());
+        this.itinerary = itinerary;
+        this.attraction = attraction;
+        this.day = day;
+    }
+
     public ItineraryAttractionPK getId() {
         return id;
     }

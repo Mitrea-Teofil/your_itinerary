@@ -1,7 +1,6 @@
 package com.toursim.application.city;
 
 import com.toursim.application.base.Utilities;
-import com.toursim.application.itinerary.Itinerary;
 import com.toursim.application.itinerary.RItinerary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +57,9 @@ public class CityService {
 
     public List<RItinerary> getCityItineraries(int id) {
         City city = cityRepository.getById(id);
+        return getCityItineraries(city);
+    }
+    public List<RItinerary> getCityItineraries(City city) {
         if(city != null){
             return city.getItineraries().stream().map(Utilities::prepareItineraryForClient).collect(Collectors.toList());
         }
