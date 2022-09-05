@@ -1,4 +1,4 @@
-<div th:fragment="review">
+
     <h2>Please leave a feedback</h2>
     <div class="container">
 
@@ -17,10 +17,19 @@
             <label for="rate-2" class="fas fa-star"></label>
             <input type="radio" name="rate" id="rate-1">
             <label for="rate-1" class="fas fa-star"></label>
-            <form action="#">
-                <header></header>
+            <form th:action="@{/ratings}" th:object="${newRating}" method="post">
+                <input type="hidden" th:field="*{itineraryId}" th:value="${itineraryId}"/>
                 <div class="textarea">
-                    <textarea cols="30" placeholder="Describe your experience.."></textarea>
+
+                    <textarea name="description"
+                              th:field="*{comment}"
+                              id="ratingDescription"
+                              class="form-control"
+                              placeholder="Describe your experience.."
+                              cols="30"
+                              rows="6"
+                              style="resize: none;"
+                    ></textarea>
                 </div>
                 <div class="btn">
                     <button type="submit">Post</button>
@@ -36,4 +45,3 @@
 
 
     </script>
-</div>

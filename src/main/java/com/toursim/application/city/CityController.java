@@ -36,6 +36,7 @@ public class CityController {
         return "cityItineraries";
     }
 
+
     @PostMapping("/cities")
     public City saveCity(@RequestBody City city) {
         return cityService.saveCity(city);

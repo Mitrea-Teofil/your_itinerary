@@ -28,9 +28,9 @@
 <section class="attractionView" id="attractionView">
 
     <div class="content">
-<!--        <h1 th:text="${attraction.name}"></h1>-->
+        <!--        <h1 th:text="${attraction.name}"></h1>-->
         <div class="bigSection box-container">
-<!--            <h2 class="bigSectionHeader">Day 1</h2>-->
+            <!--            <h2 class="bigSectionHeader">Day 1</h2>-->
             <div th:each="atr: ${attraction}">
                 <h3 class="name" th:text="${atr.name}"></h3>
                 <hr/>
@@ -48,36 +48,91 @@
                 </div>
             </div>
         </div>
-<!--        <div class="bigSection" th:if="${(itinerary.day3.size > 0)}">-->
-<!--            <h2 class="bigSectionHeader">Day 2</h2>-->
-<!--            <div th:each="atr: ${itinerary.day2}">-->
-<!--                <h3 th:text="${atr.name}"></h3>-->
-<!--                <img th:src=${atr.picture} alt="">-->
-<!--                <p class="position-text" th:text="${atr.description}"></p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="bigSection" th:if="${(itinerary.day3.size > 0)}">-->
-<!--            <h2 class="bigSectionHeader">Day 3</h2>-->
-<!--            <div th:each="atr: ${itinerary.day3}">-->
-<!--                <h3 th:text="${atr.name}"></h3>-->
-<!--                <img th:src=${atr.picture} alt="">-->
-<!--                <p class="position-text" th:text="${atr.description}"></p>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 
-<!--    <div>-->
-<!--        <h2>User feedback for this itinerary</h2>-->
-<!--        <div th:each="rating: ${itinerary.ratings}">-->
-<!--            <br/>-->
-<!--            <span th:text="|${rating.user.firstName} ${rating.user.lastName}|"/>-->
-<!--            <span th:text="${rating.stars}"/>-->
-<!--            <i class="fas fa-star"></i>-->
-<!--            <br/>-->
-<!--            <span th:text="${rating.comment}"/>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    ..........................-->
 
+    <div>
+        <div>
+            <h2>Please leave a feedback</h2>
+            <div class="container">
+
+                <div class="star-widget">
+                    <input type="radio" name="rate" id="rate-5">
+                    <label for="rate-5" class="fas fa-star" onclick="starsHeadler(5)"></label>
+                    <input type="radio" name="rate" id="rate-4">
+                    <label for="rate-4" class="fas fa-star" onclick="starsHeadler(4)"></label>
+                    <input type="radio" name="rate" id="rate-3">
+                    <label for="rate-3" class="fas fa-star" onclick="starsHeadler(3)"></label>
+                    <input type="radio" name="rate" id="rate-2">
+                    <label for="rate-2" class="fas fa-star" onclick="starsHeadler(2)"></label>
+                    <input type="radio" name="rate" id="rate-1">
+                    <label for="rate-1" class="fas fa-star" onclick="starsHeadler(1)"></label>
+                    <form th:action="@{/ratings}" th:object="${newRating}" method="post">
+                        <input type="hidden" th:field="*{attractionId}" th:value="${attractionId}"/>
+                        <input id="starsNumber" type="hidden" th:field="*{stars}" th:value="${1}"/>
+                        <div class="textarea">
+
+                    <textarea name="description"
+                              th:field="*{comment}"
+                              id="ratingDescription"
+                              class="form-control"
+                              placeholder="Describe your experience.."
+                              cols="30"
+                              rows="6"
+                              style="resize: none;"
+                    ></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <script>
+      const btn = document.querySelector("button");
+      const post = document.querySelector(".post");
+      const widget = document.querySelector(".star-widget");
+      const editBtn = document.querySelector(".edit");
+
+      function starsHeadler(stars){
+        var starsInput = document.getElementById("starsNumber");
+        starsInput.value = stars;
+      }
+
+            </script>
+        </div>
+        <br>
+        <br>
+        <h2>User feedback for this attraction</h2>
+        <div th:each="rating: ${attraction.ratings}">
+            <div class="rev-section">
+                <div class="reviews">
+                    <div class="review">
+                        <div class="body-review">
+                            <div class="name-review" th:text="|${rating.user.firstName} ${rating.user.lastName}|"></div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 2)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 2)}"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 3)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 3)}"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 4)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 4)}"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 5)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 5)}"></i>
+
+                            <div class="desc-review" th:text="${rating.comment}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <div th:replace="fragments/footer :: footer"></div>

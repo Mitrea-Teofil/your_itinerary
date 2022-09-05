@@ -1,6 +1,6 @@
 package com.toursim.application.attraction;
 
-import com.toursim.application.itinerary.RItinerary;
+import com.toursim.application.rating.RRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +29,17 @@ public class AttractionController {
     }
 
     @GetMapping("/attraction/{id}")
-    public String getAttractionsByCity(@PathVariable("id") int id, Model model) {
+    public String getAttractionsById(@PathVariable("id") int id, Model model) {
+
+        RRating rating = new RRating();
+        rating.setAttractionId(id);
+        model.addAttribute("newRating", rating);
 
         RAttraction rAttraction = attractionService.getAttraction(id);
         model.addAttribute("attraction", rAttraction);
         return "attractionView";
     }
+
 
     @PostMapping("/attractions")
     public String saveAttraction(RAttraction rAttraction, Model model) {
