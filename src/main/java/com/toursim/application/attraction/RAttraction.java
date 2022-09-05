@@ -1,6 +1,9 @@
 package com.toursim.application.attraction;
 
 import com.toursim.application.city.City;
+import com.toursim.application.rating.Rating;
+
+import java.util.List;
 
 public class RAttraction {
 
@@ -15,6 +18,8 @@ public class RAttraction {
     private double price;
 
     private double ratings;
+
+    private List<Rating> ratingList;
 
     private City city;
 
@@ -82,6 +87,14 @@ public class RAttraction {
 
     public void setRating(double ratings) {
         this.ratings = ratings;
+    }
+
+    public List<Rating> getRatingList() {
+        return ratingList;
+    }
+
+    public void setRatingList(List<Rating> ratingList) {
+        this.ratingList = ratingList;
     }
 }
 

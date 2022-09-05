@@ -23,6 +23,7 @@ public class AttractionAdapter {
         rAttraction.setCity(attraction.getCity());
         rAttraction.setRating(Utilities.averageRatings(attraction));
         rAttraction.setPrice(attraction.getPrice());
+        rAttraction.setRatingList(attraction.getRatings());
         return rAttraction;
     }
 

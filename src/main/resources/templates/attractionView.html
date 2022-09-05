@@ -70,12 +70,11 @@
                     <label for="rate-1" class="fas fa-star" onclick="starsHeadler(1)"></label>
                     <form th:action="@{/ratings}" th:object="${newRating}" method="post">
                         <input type="hidden" th:field="*{attractionId}" th:value="${attractionId}"/>
-                        <input id="starsNumber" type="hidden" th:field="*{stars}" th:value="${1}"/>
+                        <input id="starsNumber2" type="hidden" th:field="*{stars}" th:value="${1}"/>
                         <div class="textarea">
 
                     <textarea name="description"
                               th:field="*{comment}"
-                              id="ratingDescription"
                               class="form-control"
                               placeholder="Describe your experience.."
                               cols="30"
@@ -96,7 +95,7 @@
       const editBtn = document.querySelector(".edit");
 
       function starsHeadler(stars){
-        var starsInput = document.getElementById("starsNumber");
+        var starsInput = document.getElementById("starsNumber2");
         starsInput.value = stars;
       }
 
@@ -105,7 +104,7 @@
         <br>
         <br>
         <h2>User feedback for this attraction</h2>
-        <div th:each="rating: ${attraction.ratings}">
+        <div th:each="rating: ${attraction.ratingList}">
             <div class="rev-section">
                 <div class="reviews">
                     <div class="review">
