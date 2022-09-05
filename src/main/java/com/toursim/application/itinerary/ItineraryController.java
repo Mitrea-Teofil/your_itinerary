@@ -17,10 +17,10 @@ public class ItineraryController {
 
 
     @GetMapping("/itinerary/{id}")
-    public String getItinerariesByCity(@PathVariable("id") int id, Model model) {
+    public String getItineraryById(@PathVariable("id") int id, Model model) {
 
-        RItinerary itinerary = itineraryService.getItinerary(id);
-        model.addAttribute("itinerary", itinerary);
+        RItinerary rItinerary = itineraryService.getItinerary(id);
+        model.addAttribute("itinerary", rItinerary);
         return "itineraryView";
     }
 

@@ -78,7 +78,6 @@ header .logo{
   font-size: 2.5rem;
   font-weight: bolder;
   color:#fff;
-  text-transform: uppercase;
 }
 
 header .logo span{
@@ -315,7 +314,8 @@ header .search-bar-container label:hover{
 }
 
 .itineraryView .content img{
-  width: 75%;
+  width: 600px;
+  height 300px;
 }
 
 .itineraryView .content p{
@@ -353,6 +353,85 @@ header .search-bar-container label:hover{
 
 .itineraryView .controls .vid-btn.active{
   background:var(--orange);
+}
+
+/*Attraction View*/
+.attractionView{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  position: relative;
+  z-index: 0;
+}
+
+.attractionView .content{
+  text-align: left;
+}
+
+.attractionView .content h3{
+  font-size: 4.5rem;
+  color:#000000;
+  text-transform: uppercase;
+  text-shadow: 0 .3rem .5rem rgba(0,0,0,.1);
+}
+
+.attractionView .content img{
+  width: 600px;
+  height 300px;
+}
+
+.attractionView .content p{
+  font-size: 2.5rem;
+  color:#000000;
+  padding: .5rem 0;
+}
+
+.attractionView .video-container video{
+  position: absolute;
+  top:0; left: 0;
+  z-index: -1;
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
+
+.attractionView .controls{
+  padding:1rem;
+  border-radius: 5rem;
+  background:rgba(0,0,0,.7);
+  position: relative;
+  top:10rem;
+}
+
+.attractionView .controls .vid-btn{
+  height:2rem;
+  width:2rem;
+  display: inline-block;
+  border-radius: 50%;
+  background:#fff;
+  cursor: pointer;
+  margin:0 .5rem;
+}
+
+.attractionView .controls .vid-btn.active{
+  background:var(--orange);
+}
+
+.attractionView .name{
+    background:var(--orange);
+}
+
+div.stars i{
+  margin-top: 10px;
+  font-size:1.7rem;
+  color:var(--orange);
+}
+
+.attractionSection .box-container .box .content .price span{
+  color:#666;
+  font-size: 1.5rem;
 }
 
 .book .row{
@@ -413,7 +492,7 @@ header .search-bar-container label:hover{
 }
 
 .Europe .box-container .box img{
-  height: 40rem;
+  height: 25rem;
   width: 100%;
   object-fit: cover;
 }
@@ -460,7 +539,7 @@ header .search-bar-container label:hover{
 .America .box-container{
   display: flex;
   flex-wrap: wrap;
-  gap:2rem;
+  gap:5rem;
 }
 
 .America .box-container .box{
@@ -481,11 +560,13 @@ header .search-bar-container label:hover{
 }
 
 .America .box-container .box .content h3{
-  font-size:2rem;
+  font-size:3rem;
   color:#333;
+
 }
 
 .America .box-container .box .content i{
+  font-size :2rem;
   color:var(--orange);
 }
 
@@ -515,7 +596,7 @@ header .search-bar-container label:hover{
 .Asia .box-container{
   display: flex;
   flex-wrap: wrap;
-  gap:2rem;
+  gap:5rem;
 }
 
 .Asia .box-container .box{
@@ -536,11 +617,13 @@ header .search-bar-container label:hover{
 }
 
 .Asia .box-container .box .content h3{
-  font-size:2rem;
+  font-size:3rem;
   color:#333;
+
 }
 
-.Asia .box-container .box .content h3 i{
+.Asia .box-container .box .content i{
+  font-size :2rem;
   color:var(--orange);
 }
 
@@ -698,6 +781,59 @@ header .search-bar-container label:hover{
   color:#eee;
   padding:.5rem 0;
 }
+
+/*attractionSection*/
+.attractionSection .box-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap:5rem;
+}
+
+.attractionSection .box-container .box{
+  flex:1 1 30rem;
+  border-radius: .5rem;
+  overflow: hidden;
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
+}
+
+.attractionSection .box-container .box img{
+  height: 40rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+.attractionSection .box-container .box .content{
+  padding:2rem;
+}
+
+.attractionSection .box-container .box .content h3{
+  font-size:3rem;
+  color:#333;
+
+}
+
+.attractionSection .box-container .box .content i{
+  font-size :2rem;
+  color:var(--orange);
+}
+
+.attractionSection .box-container .box .content p{
+  font-size:1.7rem;
+  color:#666;
+  padding:1rem 0;
+}
+
+.attractionSection .box-container .box .content .stars i{
+  font-size:1.7rem;
+  color:var(--orange);
+}
+
+.attractionSection .box-container .box .content .price span{
+  color:#666;
+  font-size: 1.5rem;
+}
+
+
 
 /*oneDay */
 .oneDay .box-container{
@@ -886,6 +1022,69 @@ header .search-bar-container label:hover{
   font-size: 1.7rem;
 }
 
+
+.rev-section{
+    margin: auto;
+    padding: 0 1rem;
+    max-width: 1100px;
+    text-align: center;
+  }
+
+.reviews{
+    margin: 2rem auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+.review{
+    margin: 0 1rem;
+    min-width: 300px;
+    flex: 1;
+  }
+
+.head-review{
+    margin: 1.75rem auto;
+    width: 150px;
+    height: 150px;
+  }
+
+.body-review{
+    background-color: rgb(238, 238, 238);
+    padding: 2.5rem;
+    box-shadow: 2px 2px 10px 3px rgb(225, 225, 225);
+  }
+.name-review{
+    font-size: 1.5rem;
+    color: rgb(50, 50, 50);
+    margin-bottom: .25rem;
+  }
+.place-review{
+    color: red;
+    font-style: italic;
+  }
+.rating{
+    color: rgb(253, 180, 42);
+    margin: 1rem 0;
+  }
+.desc-review{
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+    color: rgb(150, 150, 150);
+  }
+
+  @media (max-width: 678px){
+    .review{
+      margin-top: 1.5rem;
+    }
+  }
+
+.empty-star{
+color: #A9A9A9;
+}
+
+
+
+
+
 .contact .row{
   display: flex;
   flex-wrap: wrap;
@@ -941,7 +1140,7 @@ header .search-bar-container label:hover{
 .footer .box-container{
   display: flex;
   flex-wrap: wrap;
-  gap:1.5rem;
+  gap:8rem;
 }
 
 .footer .box-container .box{
@@ -997,6 +1196,163 @@ max-height : 150px;
 .book .row form .inputBox input.checkBoxInput {
     margin-right: 5px;
 }
+
+.bigSection {
+    border: 2px solid #D3D3D3;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top : 20px;
+}
+
+.bigSectionHeader{
+text-align : center;
+background-color: var(--orange);
+width : 100%;
+height : 100%;
+}
+
+hr{
+border : 0;
+border-top: 2px solid #D3D3D3;
+}
+
+.section{
+display: flex;
+justify-content: space-between;
+}
+
+.section p{
+margin-left: 10px;
+}
+
+/* Review*/
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+.container{
+  position: relative;
+  width: 400px;
+  background: orange;
+  padding: 20px 30px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.container .post{
+  display: none;
+}
+.container .text{
+  font-size: 25px;
+  color: #666;
+  font-weight: 500;
+}
+.container .edit{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+}
+.container .edit:hover{
+  text-decoration: underline;
+}
+.container .star-widget input{
+  display: none;
+}
+.star-widget label{
+  font-size: 40px;
+  color: #444;
+  padding: 10px;
+  float: right;
+  transition: all 0.2s ease;
+}
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label{
+  color: #fd4;
+}
+input:checked ~ label{
+  color: #fd4;
+}
+input#rate-5:checked ~ label{
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+#rate-1:checked ~ form header:before{
+  content: "I just hate it ";
+}
+#rate-2:checked ~ form header:before{
+  content: "I don't like it ";
+}
+#rate-3:checked ~ form header:before{
+  content: "It is awesome ";
+}
+#rate-4:checked ~ form header:before{
+  content: "I just like it ";
+}
+#rate-5:checked ~ form header:before{
+  content: "I just love it ";
+}
+.container form{
+  display: none;
+}
+input:checked ~ form{
+  display: block;
+}
+form header{
+  width: 100%;
+  font-size: 25px;
+  color: #fe7;
+  font-weight: 500;
+  margin: 5px 0 20px 0;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+form .textarea{
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+form .textarea textarea{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  color: #eee;
+  border: 1px solid #333;
+  background: #222;
+  padding: 10px;
+  font-size: 17px;
+  resize: none;
+}
+.textarea textarea:focus{
+  border-color: #444;
+}
+form .btn{
+  height: 45px;
+  width: 100%;
+  margin: 15px 0;
+}
+form .btn button{
+  height: 100%;
+  width: 100%;
+  border: 1px solid #444;
+  outline: none;
+  background: #222;
+  color: #999;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+form .btn button:hover{
+  background: #1b1b1b;
+}
+
+
 
 
 
@@ -1079,5 +1435,5 @@ max-height : 150px;
     width:100%;
   }
 
-
 }
+

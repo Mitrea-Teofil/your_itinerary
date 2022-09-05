@@ -46,8 +46,8 @@ public abstract class ItineraryAdapter {
         List<Attraction> day3 = new ArrayList<>();
 
         rItinerary.setDay1(day1);
-        rItinerary.setDay1(day2);
-        rItinerary.setDay1(day3);
+        rItinerary.setDay2(day2);
+        rItinerary.setDay3(day3);
 
         attractions.forEach(itineraryAttractionRelationship -> {
             if (itineraryAttractionRelationship.getDay() == 1) {

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration and Login App</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<br>
+<br>
+<br>
+
+
+<section class="attractionView" id="attractionView">
+
+    <div class="content">
+<!--        <h1 th:text="${attraction.name}"></h1>-->
+        <div class="bigSection box-container">
+<!--            <h2 class="bigSectionHeader">Day 1</h2>-->
+            <div th:each="atr: ${attraction}">
+                <h3 class="name" th:text="${atr.name}"></h3>
+                <hr/>
+                <div class="section">
+                    <img th:src=${atr.picture} alt="">
+                    <p class="position-text" th:text="${atr.description}"></p>
+                </div>
+                <div class="stars">
+                    <span><b>Rating: </b><span th:text="|${atr.ratings}/5|"/></span>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price">
+                    <b>Costs:</b>
+                    <span th:text="${atr.price}"/>$
+                </div>
+            </div>
+        </div>
+<!--        <div class="bigSection" th:if="${(itinerary.day3.size > 0)}">-->
+<!--            <h2 class="bigSectionHeader">Day 2</h2>-->
+<!--            <div th:each="atr: ${itinerary.day2}">-->
+<!--                <h3 th:text="${atr.name}"></h3>-->
+<!--                <img th:src=${atr.picture} alt="">-->
+<!--                <p class="position-text" th:text="${atr.description}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="bigSection" th:if="${(itinerary.day3.size > 0)}">-->
+<!--            <h2 class="bigSectionHeader">Day 3</h2>-->
+<!--            <div th:each="atr: ${itinerary.day3}">-->
+<!--                <h3 th:text="${atr.name}"></h3>-->
+<!--                <img th:src=${atr.picture} alt="">-->
+<!--                <p class="position-text" th:text="${atr.description}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+
+<!--    <div>-->
+<!--        <h2>User feedback for this itinerary</h2>-->
+<!--        <div th:each="rating: ${itinerary.ratings}">-->
+<!--            <br/>-->
+<!--            <span th:text="|${rating.user.firstName} ${rating.user.lastName}|"/>-->
+<!--            <span th:text="${rating.stars}"/>-->
+<!--            <i class="fas fa-star"></i>-->
+<!--            <br/>-->
+<!--            <span th:text="${rating.comment}"/>-->
+<!--        </div>-->
+<!--    </div>-->
+
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

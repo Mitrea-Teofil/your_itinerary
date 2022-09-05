@@ -9,15 +9,16 @@ import java.util.Objects;
 @Table(name = "itinerary_attraction")
 public class ItineraryAttractionRelationship {
 
-    @EmbeddedId
-    private ItineraryAttractionPK id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id_itinerary")
+    @JoinColumn(name = "itinerary_id")
     private Itinerary itinerary;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id_attraction")
+    @JoinColumn(name = "attraction_id")
     private Attraction attraction;
 
     @Column(name = "day")
@@ -28,17 +29,16 @@ public class ItineraryAttractionRelationship {
     }
 
     public ItineraryAttractionRelationship(Itinerary itinerary, Attraction attraction, int day) {
-        this.id = new ItineraryAttractionPK(itinerary.getId(), attraction.getId());
         this.itinerary = itinerary;
         this.attraction = attraction;
         this.day = day;
     }
 
-    public ItineraryAttractionPK getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(ItineraryAttractionPK id) {
+    public void setId(int id) {
         this.id = id;
     }
 

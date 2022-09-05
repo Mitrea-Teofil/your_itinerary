@@ -1,5 +1,8 @@
 package com.toursim.application.base;
 
+import com.toursim.application.attraction.Attraction;
+import com.toursim.application.attraction.AttractionAdapter;
+import com.toursim.application.attraction.RAttraction;
 import com.toursim.application.itinerary.Itinerary;
 import com.toursim.application.itinerary.ItineraryAdapter;
 import com.toursim.application.itinerary.ItineraryAttractionRelationship;
@@ -37,5 +40,11 @@ public abstract class Utilities {
         rItinerary.setPrice(getPriceForItinerary(itinerary));
         rItinerary.setRating(Utilities.averageRatings(itinerary));
         return rItinerary;
+    }
+
+    public static RAttraction prepareItineraryForClient(Attraction attraction) {
+        RAttraction rAttraction = AttractionAdapter.toClientModel(attraction);
+        rAttraction.setRating(Utilities.averageRatings(attraction));
+        return rAttraction;
     }
 }

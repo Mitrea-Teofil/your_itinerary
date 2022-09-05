@@ -14,6 +14,8 @@ public class RAttraction {
 
     private double price;
 
+    private double ratings;
+
     private City city;
 
     private int cityId;
@@ -72,6 +74,14 @@ public class RAttraction {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public double getRatings() {
+        return ratings;
+    }
+
+    public void setRating(double ratings) {
+        this.ratings = ratings;
     }
 }
 

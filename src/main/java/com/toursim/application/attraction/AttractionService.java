@@ -1,8 +1,11 @@
 package com.toursim.application.attraction;
 
 
+import com.toursim.application.base.Utilities;
 import com.toursim.application.city.City;
 import com.toursim.application.city.CityRepository;
+import com.toursim.application.itinerary.Itinerary;
+import com.toursim.application.itinerary.RItinerary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,13 +39,13 @@ public class AttractionService {
         return city.getAttractions();
     }
 
-    public Attraction getAttraction(int id) {
+    public RAttraction getAttraction(int id) {
         Optional<Attraction> foundAttraction = attractionRepository.findById(id);
         if (foundAttraction.isPresent()) {
-            return foundAttraction.get();
-        } else {
-            throw new RuntimeException("The Attraction is not found for the id" + id);
+            Attraction attraction = foundAttraction.get();
+            return Utilities.prepareItineraryForClient(attraction);
         }
+        throw new RuntimeException("itinerary is not found for the id " + id);
     }
 
     public Attraction saveAttraction(RAttraction rAttraction) {

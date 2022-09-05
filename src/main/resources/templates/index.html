@@ -44,16 +44,8 @@
 
     <div class="content">
         <h3>adventure is worthwhile</h3>
-        <p>dicover new places with us, adventure awaits</p>
-        <a href="#" class="btn">discover more</a>
-    </div>
-
-    <div class="controls">
-        <span class="vid-btn active" data-src="images/vid-1.mp4"></span>
-        <span class="vid-btn" data-src="images/vid-2.mp4"></span>
-        <span class="vid-btn" data-src="images/vid-3.mp4"></span>
-        <span class="vid-btn" data-src="images/vid-4.mp4"></span>
-        <span class="vid-btn" data-src="images/vid-5.mp4"></span>
+        <p>discover new places with us, adventure awaits</p>
+        <a th:href="@{/#Europe}" class="btn">discover more</a>
     </div>
 
     <div class="video-container">
@@ -106,7 +98,8 @@
         <div class="box" th:each="city: ${americaCities}">
             <img th:src=${city.picture} alt="">
             <div class="content">
-                <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
+                <h3><i class="fas fa-map-marker-alt"></i> <span th:text="${city.name}"/></h3>
+                <h4><i class="fa-solid fa-landmark"></i> Itineraries: <span th:text="${city.itineraries.size}"/></h4>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
                 <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
@@ -130,7 +123,8 @@
         <div class="box" th:each="city: ${asiaCities}">
             <img th:src=${city.picture} alt="">
             <div class="content">
-                <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
+                <h3><i class="fas fa-map-marker-alt"></i> <span th:text="${city.name}"/></h3>
+                <h4><i class="fa-solid fa-landmark"></i> Itineraries: <span th:text="${city.itineraries.size}"/></h4>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
                 <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
@@ -160,7 +154,7 @@
         <div class="box" th:each="city: ${australiaCities}">
             <img th:src=${city.picture} alt="">
             <div class="content">
-                <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
+                <h3><i class="fas fa-map-marker-alt"></i> <span th:text="${city.name}"/></h3>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
                 <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
@@ -187,7 +181,7 @@
         <div class="box" th:each="city: ${africaCities}">
             <img th:src=${city.picture} alt="">
             <div class="content">
-                <h3 th:text="${city.name}"><i class="fas fa-map-marker-alt"></i></h3>
+                <h3><i class="fas fa-map-marker-alt"></i> <span th:text="${city.name}"/></h3>
                 <a th:href="@{/cities/{id}/itinerary(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover
                     Itineraries</a>
                 <a th:href="@{/attractions/{id}(id = ${city.id})}" class="btn btn-primary btn-sm mb-3"> Discover

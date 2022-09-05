@@ -15,51 +15,92 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    <script src="https://kit.fontawesome.com/3ebeadbda7.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <section class="itineraryView" id="itineraryView">
 
     <div class="content">
-        <h1 th:text="${itinerary.name}"></h1>
-        <div>
-            <h2>Day 1</h2>
+        <div class="bigSection box-container">
+            <h2 class="bigSectionHeader">Day 1</h2>
             <div th:each="atr: ${itinerary.day1}">
+                <hr/>
                 <h3 th:text="${atr.name}"></h3>
-                <img th:src=${atr.picture} alt="">
-                <p th:text="${atr.description}"></p>
+                <div class="section">
+                    <img th:src=${atr.picture} alt="">
+                    <p class="position-text" th:text="${atr.description}"></p>
+                </div>
             </div>
         </div>
-        <div th:if="${(itinerary.day3.size > 0)}">
-            <h2>Day 2</h2>
+        <div class="bigSection" th:if="${(itinerary.day2.size > 0)}">
+            <h2 class="bigSectionHeader">Day 2</h2>
             <div th:each="atr: ${itinerary.day2}">
                 <h3 th:text="${atr.name}"></h3>
                 <img th:src=${atr.picture} alt="">
-                <p th:text="${atr.description}"></p>
+                <p class="position-text" th:text="${atr.description}"></p>
             </div>
         </div>
-        <div th:if="${(itinerary.day3.size > 0)}">
-            <h2>Day 3</h2>
+        <div class="bigSection" th:if="${(itinerary.day3.size > 0)}">
+            <h2 class="bigSectionHeader">Day 3</h2>
             <div th:each="atr: ${itinerary.day3}">
                 <h3 th:text="${atr.name}"></h3>
                 <img th:src=${atr.picture} alt="">
-                <p th:text="${atr.description}"></p>
+                <p class="position-text" th:text="${atr.description}"></p>
             </div>
         </div>
     </div>
 
     <div>
+
+        <div th:replace="fragments/review :: review"></div>
+        <br>
+        <br>
         <h2>User feedback for this itinerary</h2>
         <div th:each="rating: ${itinerary.ratings}">
-            <br/>
-            <span th:text="|${rating.user.firstName} ${rating.user.lastName}|"/>
-            <span th:text="${rating.stars}"/>
-            <i class="fas fa-star"></i>
-            <br/>
-            <span th:text="${rating.comment}"/>
+            <div class="rev-section">
+                <div class="reviews">
+                    <div class="review">
+                        <div class="body-review">
+                            <div class="name-review" th:text="|${rating.user.firstName} ${rating.user.lastName}|"></div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 2)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 2)}"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 3)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 3)}"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 4)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 4)}"></i>
+
+                                <i class="fas fa-star" th:if="${(rating.stars >= 5)}"></i>
+                                <i class="fa fa-star empty-star" th:unless="${(rating.stars >= 5)}"></i>
+
+                            </div>
+                            <div class="desc-review" th:text="${rating.comment}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 </section>
+
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
