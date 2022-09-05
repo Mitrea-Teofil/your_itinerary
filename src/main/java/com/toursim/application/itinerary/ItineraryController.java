@@ -1,6 +1,7 @@
 package com.toursim.application.itinerary;
 
 import com.toursim.application.city.CityService;
+import com.toursim.application.rating.RRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,10 @@ public class ItineraryController {
 
     @GetMapping("/itinerary/{id}")
     public String getItineraryById(@PathVariable("id") int id, Model model) {
+
+        RRating rating = new RRating();
+        rating.setItineraryId(id);
+        model.addAttribute("newRating", rating);
 
         RItinerary rItinerary = itineraryService.getItinerary(id);
         model.addAttribute("itinerary", rItinerary);
